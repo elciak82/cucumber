@@ -32,4 +32,12 @@ public class Logowanie {
     public boolean isLoggedIn(){ //mozlioosc pobrania informacji (true/false), czy uzytkownik jest zalogowany
         return isLoggedIn;
     }
+
+    public String getCurrentUserName() {
+        return currentUserName;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
 }

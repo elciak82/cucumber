@@ -6,6 +6,8 @@ import org.junit.Assert;
 
 public class LogowanieSteps {
     private Logowanie logowanie;
+    private String userName; //zdefiniowanie pól
+    private String password; //zdefiniowanie pól
 
     @Given("^Uzytkownik jest na stronie logowania$")
     public void uzytkownikJestNaStronieLogowania() {
@@ -13,8 +15,10 @@ public class LogowanieSteps {
     }
 
     @And("^Uzytkownik o nazwie \"([^\"]*)\" i \"([^\"]*)\" istnieje w bazie danych$")
-    public void uzytkownikONazwieIIstniejeWBazieDanych(String userName, String password) {
-        logowanie.setUserInDataBase(userName, password);
+    public void uzytkownikONazwieIIstniejeWBazieDanych(String login, String haslo) {
+        this.userName = login; //w tych polach bedziemy przechowywac dane uzytkownika
+        this.password = haslo;
+        logowanie.setUserInDataBase(login, haslo);
     }
 
     @And("^Uzytkownik klika przycisk Zaloguj$")
@@ -33,12 +37,18 @@ public class LogowanieSteps {
     }
 
     @When("^Uzytkownik wprowadza nazwe uzytkownika \"([^\"]*)\" i haslo \"([^\"]*)\"$")
-    public void uzytkownikWprowadzaNazweUzytkownikaIHaslo(String userName, String password) {
-        logowanie.logIn(userName, password);
+    public void uzytkownikWprowadzaNazweUzytkownikaIHaslo(String login, String haslo) {
+        this.userName = login; //w tych polach bedziemy przechowywac dane uzytke podczas logowania żeby mieć dostep do tych wartosci z innych metod
+        this.password = haslo;
+        logowanie.logIn(login, haslo);
     }
 
     @But("^Dane logowania są niepoprawne$")
     public void daneLogowaniaSąNiepoprawne() {
+        //tutaj porownamy dane. username i password to zmienne zdefiniowane w klasie, dlatego mozna ich tutaj uzyc
+        String databaseUsername = logowanie.getCurrentUserName();
+        String databasePassword= logowanie.getCurrentPassword();
+        Assert.assertFalse(userName.equals(databaseUsername) && (password.equals(databasePassword)));
     }
 
     @Then("^Uzytkownik nie zostaje przekierowany na strone domowa aplikacji$")
