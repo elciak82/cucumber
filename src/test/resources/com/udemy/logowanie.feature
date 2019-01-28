@@ -1,3 +1,4 @@
+@qa
 Feature: Logowanie do aplikacji
   W tym pliku bedziemy testowac logowanie uzytkownika do aplikacji.
   Sekcja ta jest traktowana jako opis i nie wplywa na wykonanie testu.

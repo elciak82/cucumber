@@ -5,6 +5,6 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"})
+@CucumberOptions(tags = "@qa1") //wszystkie pliki teature z tym tagiem
 public class RunCucumberTest {
 }
