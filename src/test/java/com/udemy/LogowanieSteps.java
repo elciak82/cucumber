@@ -16,6 +16,7 @@ public class LogowanieSteps {
 
     @And("^Uzytkownik o nazwie \"([^\"]*)\" i \"([^\"]*)\" istnieje w bazie danych$")
     public void uzytkownikONazwieIIstniejeWBazieDanych(String login, String haslo) {
+        System.out.println("Uzytkownik podaje login: " + login + " i haslo: " + haslo); // drukowanie loginu i hasla (te podane w Example)
         this.userName = login; //w tych polach bedziemy przechowywac dane uzytkownika
         this.password = haslo;
         logowanie.setUserInDataBase(login, haslo);
@@ -38,7 +39,7 @@ public class LogowanieSteps {
 
     @When("^Uzytkownik wprowadza nazwe uzytkownika \"([^\"]*)\" i haslo \"([^\"]*)\"$")
     public void uzytkownikWprowadzaNazweUzytkownikaIHaslo(String login, String haslo) {
-        this.userName = login; //w tych polach bedziemy przechowywac dane uzytke podczas logowania żeby mieć dostep do tych wartosci z innych metod
+        this.userName = login; //w tych polach bedziemy przechowywac dane uzyte podczas logowania żeby mieć dostep do tych wartosci z innych metod
         this.password = haslo;
         logowanie.logIn(login, haslo);
     }
@@ -60,4 +61,5 @@ public class LogowanieSteps {
     public void informacjaONieudanymLogowaniuZostanieWyswietlona() {
         Assert.assertTrue(logowanie.getMsg().equals("Nie ualo Ci sie zalogowac!"));
     }
+
 }
